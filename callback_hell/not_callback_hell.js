@@ -1,4 +1,3 @@
-const { clear } = require("console");
 const {
     readdir,
     readFile,
