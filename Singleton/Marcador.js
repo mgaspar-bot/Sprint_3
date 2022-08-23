@@ -1,35 +1,36 @@
-
-class Marcador { //si en comptes de class ho faig amb function no puc ficar funcions (metodes) a dintre?
+class Marcador { //si en comptes de class ho faig amb function no puc ficar funcions (metodes) a dintre? Ho haig de fer amb el prototype
 	constructor() {
-		if (Marcador.instance instanceof Marcador) { //Si ja existeix una instancia, el constructor et torna una referencia a ella i prou
-			return Marcador.instance;
+		if (Marcador.instance instanceof Marcador) {
+			console.log(`Can't create a new instance of Marcador`);
+            console.log(`I'm returning a reference to the same instance`);
+            return Marcador.instance;
 		}
 		//Inicialitzem properties
 		this.jugadors = [];
 		this.punts = [];
 
 		//Singleton
-		Object.freeze(this); //Aixo nomes impedeix que es pugui accedir a les properties des de fora amb Marcador.instance.punts
-		Marcador.instance = this; 
+		Object.freeze(this);
+        Marcador.instance = this; 
 		
 		/* Aquesta última línia és el punt clau per fer el Singleton: afegir una propietat static a la classe
 		amb una referencia al objecte instanciat. D'aquesta manera faig "globalment accessible" la 
 		referencia a aquesta instancia, la classe en si (el seu espai estatic de memoria) te info sobre la 
-		instancia		*/
+		instancia		
+        
+        El freeze hauria d'impedir que s'accedeixi des de fora a les properties, pero no ho fa :(
+        volia impedir que (per exemple) es fes .jugadors.push() sense passar pel registrarJugador 
+        que afegeix el corresponent punts.push(0) */
 	}
 
-	//getters i setters
+	//"getters" "setters" i "toStrings"
 	registrarJugador(jugador) {
 		this.jugadors.push(jugador);
 		this.punts.push(0);
 	}
-	setPuntsNom(nom, punts) {
-		let index = this.jugadors.indexOf(nom);
-		this.punts[index] = punts;
-	}
-	setPuntsIndex(index, punts) {
-		this.punts[index] = punts;
-	}
+    addPuntsIndex(index, punt) {
+        this.punts[index] += punt;
+    }
 	showState() {
 		console.log(`Jugador		Punts
 		`);
@@ -37,23 +38,31 @@ class Marcador { //si en comptes de class ho faig amb function no puc ficar func
 			console.log(`${this.jugadors[i]}		${this.punts[i]}`);
 		}
 	}
+    clearState() {
+        Marcador.instance.jugadors.splice(0,Marcador.instance.jugadors.length);  //El this aqui no funciona, pq??
+        Marcador.instance.punts.splice(0,Marcador.instance.punts.length);
+    }
+    /*destroyInstance() {
+        Marcador.instance = null;
+        //Perdem la referencia de una i ja s'encarregara el garbage collector
+        
+        //Aquesta funcio es la forma perfecta de carregar-te la idea de Singleton
+        //perds la referencia que hi havia a Marcador, que es la que 
+        //utilitzes de control i la resta de scripts encara poden:
+        //1. accedir a la antiga instancia si s'han guardat una referencia
+                (osigui no estas destruint la instancia)
+        //2. utilitzar el new per instanciar-ne una de nova
+    }*/
 }
 
-let m1 = new Marcador();
-console.log(Marcador.instance);
-let m2 = new Marcador();
-console.log(m1 === m2);
-
-m1.registrarJugador(`Alba`); 
-m1.showState();
-m1.jugadors = `Hola`; //no fa res, ni tan sols llança error pq esta prohibit assignar properties del Marcador
-m1.showState();
-m1.setPuntsNom(`Alba`, 3); //amb el setter si que tinc dret a modificar coses tambe per aixo funciona el registrar
-m1.showState();
-
-
-s1 = new String();
-s2 = new String();
-console.log(s1 === s2);
-
 module.exports = Marcador;
+
+
+//module.exports = new Marcador();
+    /*sembla que hi ha una forma mes facil de implementar el Singleton en JavaScript que 
+    aquesta: escrius la classe normalment i simplement exportes una instancia.
+    Suposadament quan altres scripts facin el require només s'executarà el codi una vegada i 
+    module.exports sempre contindra la mateixa instancia de Marcador.
+    Com pots estar segur de que s'executa només un cop?
+    Ho farà un cop i per sempre hi haurà la mateixa instància? No entenc
+    */
