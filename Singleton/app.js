@@ -37,7 +37,7 @@ function askPlayer (str) {
 			marcador = new Marcador();
 			for (j of jugadors) {
 				marcador.registrarJugador(j);
-			}//Començar un joc nou es instanciar un marcador i registrar els Jugador, mostrar els marcadors a 0 i cridar a Joc()
+			}
 			marcador.showState();
 			await Joc(marcador);
 			jugadors.splice(0,jugadors.length);
