@@ -1,12 +1,13 @@
 
-function Joc(marcador) {
+async function Joc(marcador) {
     console.log('Comença el joc!! \n\n');
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < marcador.punts.length; j++) {
             marcador.addPuntsIndex(j, (Math.floor(Math.random()*10 + 1)));
         }
-        console.log(`Ronda ${i}`);
+        console.log(`Ronda ${i+1}`);
         marcador.showState();
+        await (function () {return new Promise ( (res) => {setTimeout( () => {res()}, 2000);})})();
         console.log('\n\n');
     }
     console.log('\n\nSha acabat el Joc!');
