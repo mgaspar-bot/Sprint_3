@@ -42,10 +42,9 @@ function showPrice(...arguments) {
     for(let arg of arguments)
         console.log(`${arg.name}-> ${arg.price} ${arg.currency}`);
 }
+let decoratedShowPrice = decoratorShowPrice(showPrice);
 
 showPrice(product1, product2, product3, product4, product5);
 console.log();
 console.log();
-let decoratedShowPrice = decoratorShowPrice(showPrice);
-
 decoratedShowPrice(product1, product2, product3, product4, product5)
