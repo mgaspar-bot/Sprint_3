@@ -1,3 +1,10 @@
+/*
+El codi adjunt llegeix un fitxer situat en un directori inbox i escriu 
+el seu contingut invertit en un altre fitxer al directori outbox.
+ Reestructura i simplifiqui el codi existent per a evitar el denominat 
+ Callback Hell.
+*/
+
 const {
     readdir,
     readFile,
@@ -26,7 +33,8 @@ async function notHell () {
         }
     } catch (error) {
         console.log(error);
-    } //Al final lo mes util es fer log de error "sencer" no nomes el message pq aixi
+    } 
+    //Al final lo mes util es fer log de error "sencer" no nomes el message pq aixi
     //pots mirar en quina linia s'ha generat l'error i diferenciar qui l'ha llençat
     //com podies fer amb el callback_hell.js
 }

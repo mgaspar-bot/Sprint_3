@@ -32,8 +32,9 @@ function askPlayer (str) {
 			jugadors.push(nj);                                                         //entre tipus i si que troba la igualtat, 2 == '2' => true
 		}    
 		else if (resp == 1) {
-			if (marcador)
-				marcador.clearState();
+			if (marcador) {
+				marcador.clearState(); //Com que sempre es la mateixa instancia, haig de borrar les puntuacions abans de fer un joc nou
+            }
 			marcador = new Marcador();
 			for (j of jugadors) {
 				marcador.registrarJugador(j);
@@ -60,4 +61,5 @@ function askPlayer (str) {
 		}
 	} while (resp != 0);
 	rl.close();
+    console.log(`Vagi bé :)`);
 })();

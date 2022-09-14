@@ -60,7 +60,7 @@ module.exports = Marcador;
 
 //module.exports = new Marcador();
     /*sembla que hi ha una forma mes facil de implementar el Singleton en JavaScript que 
-    aquesta: escrius la classe normalment i simplement exportes una instancia.
+     és aquesta: escrius la classe normalment i simplement exportes una instancia.
     Suposadament quan altres scripts facin el require només s'executarà el codi una vegada i 
     module.exports sempre contindra la mateixa instancia de Marcador.
     Com pots estar segur de que s'executa només un cop?
