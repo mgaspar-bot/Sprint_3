@@ -17,7 +17,7 @@ const request = JSON.parse(readFileSync('./data.json'));
 // console.log(data.operacio.constructor.name);
 /*
 JSON.parse converteix molt convenientment un json qualsevol en un objecte
-així que ara puc accedir a la array ded valors amb data.values i tinc dues strings
+així que ara puc accedir a la array de valors amb data.values i tinc dues strings
 que m'indiquen la ruta de middlewares que haig de seguir
 */
 const calcu = require('./calcu.js');
@@ -25,19 +25,22 @@ var resultat;
 
 console.log(`Original request values: ${request.values}`);
 
-if (request.middlewares === undefined) {
-    switch (request.operacio) {
-        case ('suma') :
-            resultat = calcu.suma(request.values);
-            console.log(resultat);
-            break;
-        case ('resta') :
-            resultat = calcu.resta(request.values);
-            console.log(resultat);
-            break;
-        case ('multiplica'):
-            resultat = calcu.multiplica(request.values);
-            console.log(resultat);
-            break;            
-    }
+switch (request.middlewares) {
+    case ('quadrat') :
+        
 }
+switch (request.operacio) {
+    case ('suma') :
+        resultat = calcu.suma(request.values);
+        console.log(resultat);
+        break;
+    case ('resta') :
+        resultat = calcu.resta(request.values);
+        console.log(resultat);
+        break;
+    case ('multiplica'):
+        resultat = calcu.multiplica(request.values);
+        console.log(resultat);
+        break;       
+}
+
