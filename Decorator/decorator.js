@@ -27,8 +27,13 @@ function decoratorShowPrice (showPrice) {
                     }
                     arg.priceEUR = Math.round(arg.priceEUR * 100) / 100;
                 }
+                
+                showPrice(arg); //showPrice tambe funciona si li passes un sol argument, i aixi evito haver de tocar el codi de la "original"
+                if (arg.priceEUR != undefined) {                     
+                    console.log(`   Price in EUR: ${arg.priceEUR}`);
+                }
             }
-            showPrice(...arguments);
+            
         }     
 }
 
