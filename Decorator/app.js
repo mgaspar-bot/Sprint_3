@@ -39,12 +39,27 @@ const product5 = {
 }
 
 function showPrice(...arguments) {
-    for(let arg of arguments)
+    for(let arg of arguments)  {
         console.log(`${arg.name}-> ${arg.price} ${arg.currency}`);
+        // console.log(Object.getOwnPropertyNames(arg));
+        if (arg.priceEUR != undefined) {                     
+            console.log(`   Price in EUR: ${arg.priceEUR}`);
+        }
+        console.log();
+        /*
+        Fet aixi la funcio sense decorar checkeja una propietat que en realitat ha generat la funcio decorada,
+        jo crec que aixo està malament.
+        Quin sentit te fer un decorator si per afegir la funcionalitat igualment haig de tocar el codi de la 
+        funcio original
+        */
+    }
+        
 }
 let decoratedShowPrice = decoratorShowPrice(showPrice);
 
 showPrice(product1, product2, product3, product4, product5);
+console.log();
+console.log();
 console.log();
 console.log();
 decoratedShowPrice(product1, product2, product3, product4, product5)
