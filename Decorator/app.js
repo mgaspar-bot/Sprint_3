@@ -39,12 +39,17 @@ const product5 = {
 }
 
 function showPrice(...arguments) {
-    for(let arg of arguments)
+    for(let arg of arguments)  {
         console.log(`${arg.name}-> ${arg.price} ${arg.currency}`);
+        // console.log(Object.getOwnPropertyNames(arg));
+    }
+        
 }
 let decoratedShowPrice = decoratorShowPrice(showPrice);
 
 showPrice(product1, product2, product3, product4, product5);
+console.log();
+console.log();
 console.log();
 console.log();
 decoratedShowPrice(product1, product2, product3, product4, product5)
