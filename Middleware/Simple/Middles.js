@@ -13,6 +13,7 @@ Insereix a la invocació middlewares que facin el quadrat,
 
 class Middleware {
     constructor(){
+        this.reqM = {}; //objecte on guardarem la req per passar-la
         this.route= [];
     }
     appendToRoute(fn){
@@ -20,10 +21,18 @@ class Middleware {
             this.route.push(fn);
         }
     }
-    executeRoute(context, args){
+    executeRoute(reqA, func){
+        this.reqM = reqA; //estic assignant una referencia al objecte request, quan transformo un transformo laltre pq reqA i reqM apunten al mateix objecte en memoria
+        /* demostracio: 
+        console.log(this.reqM === reqA);                true
+        const r = {                                     
+            values: reqA.values                                 r conte el mateix que reqA                          
+        };
+        console.log(r === reqA);                                false                            */
         for(let fn of this.route) {
-            fn.call(context, args);
+            fn.call(this, this.reqM)
         }
+        return func.call(this, this.reqM); //li posem el return pq torni el mateix que la original
     }
 }
 

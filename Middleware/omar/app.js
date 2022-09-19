@@ -1,4 +1,3 @@
-//const Middleware = require("./omar.js");
 
 class Middleware {
     constructor(target) {
