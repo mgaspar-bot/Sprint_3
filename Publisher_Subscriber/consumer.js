@@ -2,9 +2,10 @@ const amqp = require('amqplib');
 const Qname = require('./establishQ.js');
 //el Qname que hem importat és un Buffer, l'hem de passar a 
 //pura string pq sino no li agrada a la llibreria
-console.log(Qname);
-console.log(Qname.toString());
-console.log(Qname.constructor.name);
+// console.log(Qname);
+// console.log(Qname.toString());
+// console.log(Qname.constructor.name);
+Qname = Qname.toString();
 
 (async function listen () {
     const conn = await amqp.connect('amqp://localhost');

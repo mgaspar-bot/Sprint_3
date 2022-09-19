@@ -29,17 +29,5 @@ const Qname = require('./establishQ.js');
 
     //posar un await davant de sendToQueue no funcionava pq no torna una
     //promise
-
-    /*
-Flow control
-Channels act like stream.Writable when you call publish or sendToQueue: they 
-return either true, meaning “keep sending”, or false, meaning “please wait for a
- ‘drain’ event”.
-
-Those methods, along with ack, ackAll, nack, nackAll, and reject, do not have
- responses from the server. This means they do not return a promise in the 
- promises API. The ConfirmChannel does accept a callback in both APIs, called
-  when the server confirms the message; as well as returning a boolean.
-    */
 })();
 
