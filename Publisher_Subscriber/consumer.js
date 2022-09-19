@@ -5,7 +5,7 @@ const Qname = require('./establishQ.js');
 // console.log(Qname);
 // console.log(Qname.toString());
 // console.log(Qname.constructor.name);
-Qname = Qname.toString();
+// Qname = Qname.toString();
 
 (async function listen () {
     const conn = await amqp.connect('amqp://localhost');
