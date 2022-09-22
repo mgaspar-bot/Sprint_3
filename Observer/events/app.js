@@ -6,46 +6,8 @@ mostraran per consola cadascun dels Usuaris/es que estiguin subscrits al Tema (r
 el missatge). Crea un Tema amb un Usuari/ària i un altre amb dos i mostra la recepció 
 dels missatges pels usuaris/es. Utilitza el mòdul events.
 */
-
-const EventEmiter = require('events').EventEmitter;
-let em = new EventEmiter();
-
-class Usuari {
-    constructor (name) {
-        this.name = name;
-    }
-    notify (message) {
-        console.log(`${this.name} has been notified:
-        ${message}`);
-        console.log();
-    }
-    sendMessage(tema, message) {
-        if (tema instanceof Tema) {
-            tema.postMessage(message, this);
-        }
-    }
-}
-
-class Tema {
-    constructor (titol) {
-        this.titol = titol;
-        this.postedMessages = [];
-        this.subs = [];
-    }
-    subscribe (observer) {
-        if (observer instanceof Usuari) {
-            this.subs.push(observer);
-            em.on(this.titol, (message) => {observer.notify(message) } );
-        }
-    }
-    postMessage(message, observer) {
-        if (observer instanceof Usuari) {
-            message = `In ${this.titol}-> ${observer.name} : ${message}`;
-            this.postedMessages.push(message);
-            em.emit(this.titol, message);
-        }
-    }
-}
+const Usuari = require('./Usuari');
+const Tema = require('./Tema');
 
 const u1 = new Usuari(`Pep`);
 const u2 = new Usuari(`Pepa`);
@@ -60,7 +22,7 @@ const t1 = new Tema(`Taronjes`);
 const t2 = new Tema(`Patates`);
 
 t1.subscribe(u1);
-// t1.subscribe(u2);
+t1.subscribe(u2);
 // t1.subscribe(u3);
 // t1.subscribe(u4);
 
@@ -74,6 +36,9 @@ u4.sendMessage(t1, `Ei soc la Maria`); //es poden enviar missatges sense estar s
 console.log();
 console.log();
 u5.sendMessage(t2, `Hola soc el Roc`)
+console.log();
+console.log();
+u2.sendMessage(t1, `Ei soc la Pepa`);
 
 
 

@@ -1,11 +1,22 @@
+
 const amqp = require('amqplib');
-const Qname = require('./establishQ.js');
-//el Qname que hem importat és un Buffer, l'hem de passar a 
-//pura string pq sino no li agrada a la llibreria
-// console.log(Qname);
-// console.log(Qname.toString());
-// console.log(Qname.constructor.name);
-// Qname = Qname.toString();
+
+const Qname = 'chatRoom2';
+
+(async function establishQ() {
+    try {
+        const conn = await amqp.connect('amqp://localhost:5672');
+        const channel = await conn.createChannel();
+        await channel.assertQueue(Qname);
+        console.log(`Successfully established or connected to queue with name: ${Qname}`);
+    } catch (error) {
+        console.log(`
+
+        Error establishing or connecting to queue:
+        `);
+        console.log(error);
+    }
+})();
 
 (async function listen () {
     const conn = await amqp.connect('amqp://localhost');
@@ -17,7 +28,6 @@ const Qname = require('./establishQ.js');
     }`);
     chn.ack(msg);
     }); 
-
-
 })();
-//Consume es un listener que es quedar actiu esperant??
+
+module.exports = Qname;

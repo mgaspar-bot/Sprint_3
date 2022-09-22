@@ -3,6 +3,7 @@ const rl = readline.createInterface( {
 	input : process.stdin,
 	output : process.stdout
 }); 
+
 const Marcador = require('./Marcador.js');
 const Joc = require('./Joc.js');
 
