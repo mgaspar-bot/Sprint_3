@@ -1,33 +1,11 @@
-/*
-Boníssima feina amb el singleton, t'has complicat una mica 
-més del que calia... podries haver fet els jugadors i el joc 
-simulat afegint i treient punts "a mà".  Sobre el patró en si, 
-el singleton està bé, però els mètodes haurien de ser del joc, 
-de manera que inicialitzis més d'un joc, afegeixis jugadors als 
-jocs i puguis afegir/treure punts i mirar qui es el guanyador 
-de cada joc. Al marcador no s'hi hauria d'accedir 
-directament, sino només tenir-hi acces els jocs.
-*/
-/*
-Decidim doncs que la classe Marcador només tindrà la lògica de
-Singleton i guardarà els jocs i puntuacions
-    registerJoc: build Json
-    addPuntsJugador(joc, jugador, punts): search index of jugador, change that index puntuacions
-    returnJSON(joc): search joc, return its JSON
-
-*/
-
 class Marcador { 
-	constructor() {
+    constructor() {
 		if (Marcador.instance instanceof Marcador) {
 			console.log(`Can't create a new instance of Marcador`);
             console.log(`I'm returning a reference to the same instance`);
             return Marcador.instance;
 		}
-		//Inicialitzem properties
 		this.jocs=[]
-            //Ara nomes tindrem una array de objects amb una estructura determinada que representa el estat de cada joc
-
 		//Singleton
 		Object.freeze(this);
         Marcador.instance = this; 

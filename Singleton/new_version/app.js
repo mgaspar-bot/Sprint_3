@@ -1,12 +1,5 @@
 const Joc = require('./Joc');
 
-/*
-de manera que inicialitzis més d'un joc, afegeixis jugadors als 
-jocs i puguis afegir/treure punts i mirar qui es el guanyador 
-de cada joc. Al marcador no s'hi hauria d'accedir 
-directament, sino només tenir-hi acces els jocs.
-*/
-
 const j1 = "Alba";
 const j2 = "Marc";
 const j3 = "Aina";
@@ -29,9 +22,11 @@ parxis.ronda();
 parxis.quiGuanya();
 
 parxis.marcador.showAllGames();
+
+
 //encara es poden fer trampes i canviar puntuacions des daqui
-parxis.marcador.jocs[0].puntuacions[0] += -5;
-parxis.marcador.showAllGames();
+// parxis.marcador.jocs[0].puntuacions[0] += -5;
+// parxis.marcador.showAllGames();
 /*
 He fet el paripe del getGameState pq nomes es modifiquessin coses
 usant els metodes de Marcdador pero no serveix de res.
@@ -39,9 +34,9 @@ Si des d'aqui faig que els indexs de jugadors i puntuacions no corresponguin
 em carrego Marcador:
 */
 
-parxis.marcador.jocs[0].jugadors.splice(0,1);
-parxis.marcador.showAllGames();
-uno.quiGuanya();
+// parxis.marcador.jocs[0].jugadors.splice(0,1);
+// parxis.marcador.showAllGames();
+// uno.quiGuanya();
 
 
 
