@@ -9,6 +9,7 @@ de cada joc. Al marcador no s'hi hauria d'accedir
 directament, sino només tenir-hi acces els jocs.
 */
 
+
 const Marcador = require("./Marcador");
 
 class Joc {
@@ -20,15 +21,33 @@ class Joc {
     }
     registrarJugador(nomJugador) {
         this.jugadors.push(nomJugador);
-        this.marcador.afegirJugador(nomJugador, this.nom);
     }
-    jugar() {
-        for (let nomJugador of this.jugadors){
-            this.marcador.afegirJugador(nomJugador, this.nom);
+    registrarTotsJugadors(arrayJugadors) {
+        this.jugadors = arrayJugadors;
+    }
+    startJoc() {
+        this.marcador.registrarJoc(this.nom, this.jugadors);
+        console.log(`Comenca el joc!`);
+        console.log(this.marcador.getGameState(this.nom));        
+    }
+    ronda() {
+        for(let jugador of this.jugadors) {
+            this.marcador.addPunts(jugador, this.nom, (Math.floor(Math.random()*10 + 1)));
         }
+        console.log(this.marcador.getGameState(this.nom));
     }
     quiGuanya() {
-        console.log(this.marcador.getGuanyador());
+        let estatMarcador = this.marcador.getGameState(this.nom);
+        // let maxPunts = estatMarcador.puntuacions.reduce((p,c) => p > c ? p : c);
+        let maxPunts = -Infinity;
+        let indG;
+        for (let i = 0; i < estatMarcador.puntuacions.length; i++){
+            if (estatMarcador.puntuacions[i] > maxPunts) {
+                maxPunts = estatMarcador.puntuacions[i];
+                indG = i;
+            }
+        }
+        console.log(`${estatMarcador.jugadors[indG]} ha guanyat!`);
     }
 }
 
