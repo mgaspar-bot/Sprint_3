@@ -40,10 +40,16 @@ class MiddlewareTOP {
             */
         }
     }
-    executeMiddlewareRoute(){
-        for (let middle of this.middlewareRoute) {
-            middle.call(this, this.req);
-        }
+    executeMiddlewareRoute(i ){
+        // for (let middle of this.middlewareRoute) {
+        //     middle.call(this, this.req);
+        // }
+        console.log(i);
+        if (i === undefined) i = 0;
+        if (i === this.middlewareRoute.length -1) return;
+        console.log(i);
+
+        this.middlewareRoute[i].call(this, this.req, this.executeMiddlewareRoute(i +1))
     }
     use(func) {
         this.middlewareRoute.push(func);
